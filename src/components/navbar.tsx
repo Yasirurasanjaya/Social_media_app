@@ -2,7 +2,6 @@ import {Link} from 'react-router-dom';
 import {auth} from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth"
 import {signOut} from "firebase/auth"
-import { async } from '@firebase/util';
 
 export const Navbar= ()=>{
 
@@ -11,15 +10,17 @@ export const Navbar= ()=>{
     const signUserOut = async()=>{
         await signOut(auth)
     }
-    return <div>
+    return <div className='navbar'>
+        <div className='links'>
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
-        <div>
+        </div>
+        <div className='user'>
             <p>{user?.displayName}</p>
             {user && (
                 <>
-            <img src={user?.photoURL|| ""} width="100" height="100"/>
-            <button onClick={signUserOut}>Sign Out</button>
+            <img src={user?.photoURL|| ""} width="30" height="30"/>
+            <button className='btn' onClick={signUserOut}>Sign Out</button>
             </>
             )}
         </div>
